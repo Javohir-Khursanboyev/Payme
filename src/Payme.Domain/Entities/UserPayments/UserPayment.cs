@@ -1,8 +1,9 @@
 ﻿using Payme.Domain.Commons;
-using Payme.Domain.Enitites.Payments;
-using Payme.Domain.Enitites.Users;
+using Payme.Domain.Entities.Cards;
+using Payme.Domain.Entities.Payments;
+using Payme.Domain.Entities.Users;
 
-namespace Payme.Domain.Enitites.UserPayments;
+namespace Payme.Domain.Entities.UserPayments;
 
 public class UserPayment : Auditable
 {

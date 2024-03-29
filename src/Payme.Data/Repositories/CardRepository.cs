@@ -1,16 +1,16 @@
 ﻿using Payme.Data.IRepositories;
-using Payme.Domain.Entities.Users;
+using Payme.Domain.Entities.Cards;
 
 namespace Payme.Data.Repositories;
 
-public class UserRepository : IUserRepository
+public class CardRepository : ICardRepository
 {
-    public Task<bool> DeleteAsync(User user)
+    public Task<bool> DeleteAsync(Card card)
     {
         throw new NotImplementedException();
     }
 
-    public Task<User> InsertAsync(User user)
+    public Task<Card> InsertAsync(Card card)
     {
         throw new NotImplementedException();
     }
@@ -20,22 +20,22 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<User>> SelectAllAsIEnumerable()
+    public Task<IEnumerable<Card>> SelectAllAsIEnumerable()
     {
         throw new NotImplementedException();
     }
 
-    public Task<IQueryable<User>> SelectAllIQueryable()
+    public Task<IQueryable<Card>> SelectAllIQueryable()
     {
         throw new NotImplementedException();
     }
 
-    public Task<User> SelectAsync(long id)
+    public Task<Card> SelectAsync(long id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<User> UpdateAsync(User user)
+    public Task<Card> UpdateAsync(Card card)
     {
         throw new NotImplementedException();
     }

@@ -1,6 +1,6 @@
 ﻿using Payme.Domain.Commons;
 
-namespace Payme.Domain.Enitites.PaymentCategories;
+namespace Payme.Domain.Entities.PaymentCategories;
 
 public class PaymentCategory : Auditable
 {

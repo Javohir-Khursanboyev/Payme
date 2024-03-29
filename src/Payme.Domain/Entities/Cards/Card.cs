@@ -1,7 +1,7 @@
 ﻿using Payme.Domain.Commons;
-using Payme.Domain.Enitites.Users;
+using Payme.Domain.Entities.Users;
 
-namespace Payme.Domain.Enitites.Cards;
+namespace Payme.Domain.Entities.Cards;
 
 public class Card : Auditable
 {
