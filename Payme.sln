@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3EAEEC86-F1F8-42B5-9DAA-9CC565B65466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payme.WebApi", "src\Payme.WebApi\Payme.WebApi.csproj", "{807794BE-CC63-4CB8-AF70-EC0FCB334F20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payme.Data", "src\Payme.Data\Payme.Data.csproj", "{C0A747DA-C5E9-4AF7-9D09-4FEC4907D244}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payme.Domain", "src\Payme.Domain\Payme.Domain.csproj", "{557E1C28-92C9-4A13-99E2-B473D6AFEEC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payme.Service", "src\Payme.Service\Payme.Service.csproj", "{57B4055A-2BD0-408D-B11B-9598F3277159}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A9CF88CC-7DC9-4035-BFFC-8717723161B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payme.Tests", "test\Payme.Tests\Payme.Tests.csproj", "{669065CD-9C70-4189-BF4E-281ABAB3CC1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{807794BE-CC63-4CB8-AF70-EC0FCB334F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{807794BE-CC63-4CB8-AF70-EC0FCB334F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{807794BE-CC63-4CB8-AF70-EC0FCB334F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{807794BE-CC63-4CB8-AF70-EC0FCB334F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A747DA-C5E9-4AF7-9D09-4FEC4907D244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A747DA-C5E9-4AF7-9D09-4FEC4907D244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A747DA-C5E9-4AF7-9D09-4FEC4907D244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A747DA-C5E9-4AF7-9D09-4FEC4907D244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{557E1C28-92C9-4A13-99E2-B473D6AFEEC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{557E1C28-92C9-4A13-99E2-B473D6AFEEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{557E1C28-92C9-4A13-99E2-B473D6AFEEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{557E1C28-92C9-4A13-99E2-B473D6AFEEC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57B4055A-2BD0-408D-B11B-9598F3277159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57B4055A-2BD0-408D-B11B-9598F3277159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57B4055A-2BD0-408D-B11B-9598F3277159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57B4055A-2BD0-408D-B11B-9598F3277159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{669065CD-9C70-4189-BF4E-281ABAB3CC1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{669065CD-9C70-4189-BF4E-281ABAB3CC1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{669065CD-9C70-4189-BF4E-281ABAB3CC1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{669065CD-9C70-4189-BF4E-281ABAB3CC1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{807794BE-CC63-4CB8-AF70-EC0FCB334F20} = {3EAEEC86-F1F8-42B5-9DAA-9CC565B65466}
+		{C0A747DA-C5E9-4AF7-9D09-4FEC4907D244} = {3EAEEC86-F1F8-42B5-9DAA-9CC565B65466}
+		{557E1C28-92C9-4A13-99E2-B473D6AFEEC0} = {3EAEEC86-F1F8-42B5-9DAA-9CC565B65466}
+		{57B4055A-2BD0-408D-B11B-9598F3277159} = {3EAEEC86-F1F8-42B5-9DAA-9CC565B65466}
+		{669065CD-9C70-4189-BF4E-281ABAB3CC1B} = {A9CF88CC-7DC9-4035-BFFC-8717723161B1}
+	EndGlobalSection
+EndGlobal
