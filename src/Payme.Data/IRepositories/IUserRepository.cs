@@ -8,7 +8,7 @@ public interface IUserRepository
     Task<User> UpdateAsync(User user);
     Task<User> SelectAsync(long id);
     Task<bool> DeleteAsync (User user);
-    Task<IEnumerable<User>> SelectAllAsIEnumurable();
+    Task<IEnumerable<User>> SelectAllAsIEnumerable();
     Task<IQueryable<User>> SelectAllIQueryable();
     Task SaveAsync();
 }
