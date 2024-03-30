@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Payme.Domain\Payme.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interface\" />
+  </ItemGroup>
+
 </Project>

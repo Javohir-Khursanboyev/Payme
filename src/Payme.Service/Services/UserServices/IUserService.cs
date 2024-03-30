@@ -1,6 +1,6 @@
 ﻿using Payme.Service.DTOs.Users;
 
-namespace Payme.Service.Interface;
+namespace Payme.Service.Services.UserServices;
 
 public interface IUserService
 {
