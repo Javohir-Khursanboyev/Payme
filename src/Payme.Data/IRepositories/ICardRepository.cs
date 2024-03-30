@@ -10,5 +10,4 @@ public interface ICardRepository
     Task<bool> DeleteAsync(Card card);
     Task<IEnumerable<Card>> SelectAllAsIEnumerable();
     Task<IQueryable<Card>> SelectAllIQueryable();
-    Task SaveAsync();
 }
