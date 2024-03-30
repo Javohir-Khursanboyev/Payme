@@ -16,8 +16,8 @@ public class CardRepository : ICardRepository
     }
     public async Task<Card> InsertAsync(Card card)
     {
-        var cardQuery = @"INSERT INTO Cards (CustomerId, Type, Number, ExpiryData, Password, Balance, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
-                             VALUES (@CustomerId, @Type, @Number, @ExpiryData, @Password, @Balance, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
+        var cardQuery = @"INSERT INTO Cards (CustomerId, CardType, Number, ExpiryData, Password, Balance, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
+                             VALUES (@CustomerId, @CardType, @Number, @ExpiryData, @Password, @Balance, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
                              RETURNING Id";
 
         using (var connection = new NpgsqlConnection(connectionString))
@@ -30,7 +30,7 @@ public class CardRepository : ICardRepository
 
     public async Task<Card> UpdateAsync(Card card)
     {
-        var cardQuery = @"UPDATE Cards SET CustomerId = @CustomerId, Type = @Type, 
+        var cardQuery = @"UPDATE Cards SET CustomerId = @CustomerId, CardType = @CardType, 
                                            Number = @Number, ExpiryData = @ExpiryData, Password = @Password,
                                            Balance = @Balance,UpdatedAt = @UpdatedAt, IsDeleted = false
                                        WHERE Id = @Id";

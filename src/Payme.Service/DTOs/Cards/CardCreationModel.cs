@@ -1,13 +1,11 @@
-﻿using Payme.Domain.Commons;
-using Payme.Domain.Entities.Users;
+﻿using Payme.Domain.Entities.Users;
 using Payme.Domain.Enums;
 
-namespace Payme.Domain.Entities.Cards;
+namespace Payme.Service.DTOs.Cards;
 
-public class Card : Auditable
+public class CardCreationModel
 {
     public long CustomerId { get; set; }
-    public User Customer { get; set; }
     public CardType Type { get; set; }
     public long Number { get; set; }
     public string ExpiryData { get; set; }
