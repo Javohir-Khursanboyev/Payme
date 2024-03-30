@@ -1,4 +1,6 @@
-﻿namespace Payme.WebApi.Models;
+﻿using System.Text.RegularExpressions;
+
+namespace Payme.WebApi.Models;
 
 public class Response
 {
