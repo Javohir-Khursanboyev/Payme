@@ -6,5 +6,6 @@ public class TransactionViewModel
     public long SenderCardId { get; set; }
     public long ReceiverCardId { get; set; }
     public decimal Amount { get; set; }
+    public string Password { get; set; }
     public DateTime CreatedAt { get; set; }
 }

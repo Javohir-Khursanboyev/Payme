@@ -9,5 +9,4 @@ public class CardUpdateModel
     public long Number { get; set; }
     public string ExpiryData { get; set; }
     public string Password { get; set; }
-    public decimal Balance { get; set; }
 }

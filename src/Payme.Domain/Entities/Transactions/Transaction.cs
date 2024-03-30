@@ -10,4 +10,5 @@ public class Transaction : Auditable
     public long ReceiverCardId { get; set; }
     public Card ReceiverCard { get; set; }
     public decimal Amount { get; set; }
+    public string Password { get; set; }
 }
