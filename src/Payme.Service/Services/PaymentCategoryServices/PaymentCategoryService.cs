@@ -17,7 +17,7 @@ public class PaymentCategoryService : IPaymentCategoryService
         this.mapper = mapper;
     }
 
-    public async Task<PaymentCategoryViewModel> CreateAsync(PaymentCategoryViewModel model)
+    public async Task<PaymentCategoryViewModel> CreateAsync(PaymentCategoryCreationModel model)
     {
         var paymentCategories = await repository.SelectAllAsQueryableAsync();
 
