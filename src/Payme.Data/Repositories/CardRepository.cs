@@ -15,15 +15,16 @@ public class CardRepository : ICardRepository
     {
         connectionString = configuration.GetConnectionString("DefaultConnection");
     }
+
     public async Task<Card> InsertAsync(Card card)
     {
-        var cardQuery = @"INSERT INTO Cards (CustomerId, Type, Number, ExpiryData, Password, Balance, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
-                             VALUES (@CustomerId, @Type, @Number, @ExpiryData, @Password, @Balance, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
+        var query = @"INSERT INTO Cards (CustomerId, CardType, Number, ExpiryData, Password, Balance, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
+                             VALUES (@CustomerId, @CardType, @Number, @ExpiryData, @Password, @Balance, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
                              RETURNING Id";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
-            var id = await connection.ExecuteScalarAsync<long>(cardQuery, card);
+            var id = await connection.ExecuteScalarAsync<long>(query, card);
             card.Id = id;
         }
         return card;
@@ -31,27 +32,26 @@ public class CardRepository : ICardRepository
 
     public async Task<Card> UpdateAsync(Card card)
     {
-        var cardQuery = @"UPDATE Cards SET CustomerId = @CustomerId, Type = @Type, 
-                                           Number = @Number, ExpiryData = @ExpiryData, Password = @Password,
-                                           Balance = @Balance,UpdatedAt = @UpdatedAt, IsDeleted = false
-                                       WHERE Id = @Id";
+        var query = @"UPDATE Cards SET CustomerId = @CustomerId, CardType = @CardType, 
+                                       Number = @Number, ExpiryData = @ExpiryData, Password = @Password,
+                                       Balance = @Balance,UpdatedAt = @UpdatedAt, IsDeleted = false
+                                   WHERE Id = @Id";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
-            await connection.ExecuteAsync(cardQuery, card);
+            await connection.ExecuteAsync(query, card);
         }
         return card;
     }
 
     public async Task<bool> DeleteAsync(Card card)
     {
-        var cardQuery = @"UPDATE Cards SET IsDeleted = false, 
-                                           DeletedAt = @DeletedAt 
-                                       WHERE Id = @Id";
+        var query = @"UPDATE Cards SET IsDeleted = false, DeletedAt = @DeletedAt 
+                                   WHERE Id = @Id";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
-            await connection.ExecuteAsync(cardQuery, card);
+            await connection.ExecuteAsync(query, card);
         }
         return true;
     }

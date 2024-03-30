@@ -14,15 +14,16 @@ public class TransactionRepository : ITransactionRepository
     {
         connectionString = configuration.GetConnectionString("DefaultConnection");
     }
+
     public async Task<Transaction> InsertAsync(Transaction transaction)
     {
-        var transactionQuery = @"INSERT INTO Transactions (SenderId, ReceiverId, Amount, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
-                             VALUES (@SenderId, @ReceiverId, @Amount, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
-                             RETURNING Id";
+        var query = @"INSERT INTO Transactions (SenderId, ReceiverId, Amount, Password, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
+                                  VALUES (@SenderId, @ReceiverId, @Amount, @Password, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
+                                  RETURNING Id";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
-            var id = await connection.ExecuteScalarAsync<long>(transactionQuery, transaction);
+            var id = await connection.ExecuteScalarAsync<long>(query, transaction);
             transaction.Id = id;
         }
         return transaction;
@@ -30,26 +31,25 @@ public class TransactionRepository : ITransactionRepository
 
     public async Task<Transaction> UpdateAsync(Transaction transaction)
     {
-        var transactionQuery = @"UPDATE Transactions SET SenderId = @SenderId, ReceiverId = @ReceiverId, 
-                                                         Amount = @Amount, UpdatedAt = @UpdatedAt, IsDeleted = false
-                                                     WHERE Id = @Id";
+        var query = @"UPDATE Transactions SET SenderId = @SenderId, ReceiverId = @ReceiverId, Password = @Password,
+                                              Amount = @Amount, UpdatedAt = @UpdatedAt, IsDeleted = false
+                                          WHERE Id = @Id";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
-            await connection.ExecuteAsync(transactionQuery, transaction);
+            await connection.ExecuteAsync(query, transaction);
         }
         return transaction;
     }
 
     public async Task<bool> DeleteAsync(Transaction transaction)
     {
-        var transactionQuery = @"UPDATE Transactions SET IsDeleted = false, 
-                                                         DeletedAt = @DeletedAt 
-                                                     WHERE Id = @Id";
+        var query = @"UPDATE Transactions SET IsDeleted = false, DeletedAt = @DeletedAt 
+                                          WHERE Id = @Id";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
-            await connection.ExecuteAsync(transactionQuery, transaction);
+            await connection.ExecuteAsync(query, transaction);
         }
         return true;
     }
