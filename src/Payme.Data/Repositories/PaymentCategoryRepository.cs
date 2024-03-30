@@ -15,7 +15,9 @@ public class PaymentCategoryRepository : IPaymentCategoryRepository
 
     public async Task<PaymentCategory> InsertAsync(PaymentCategory paymentCategory)
     {
-        var query = @"INSERT INTO PaymentCategories(Name) Values (@Name) RETURNING Id";
+        var query = @"INSERT INTO PaymentCategories(Name, CreatedAt, UpdatedAt, DeletedAt, IsDeleted)
+                        Values (@Name, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
+                        RETURNING Id";
         using (var connection = new NpgsqlConnection(connectionString))
         {
             var id = await connection.ExecuteScalarAsync<long>(query, paymentCategory);
