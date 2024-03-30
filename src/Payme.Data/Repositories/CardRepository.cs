@@ -67,7 +67,7 @@ public class CardRepository : ICardRepository
         }
     }
 
-    public async Task<IEnumerable<Card>> SelectAllAsIEnumerable()
+    public async Task<IEnumerable<Card>> SelectAllAsIEnumerableAsync()
     {
         var cardQuery = "SELECT * FROM Cards WHERE Id = @id AND IsDeleted = false";
 
@@ -77,7 +77,7 @@ public class CardRepository : ICardRepository
         }
     }
 
-    public async Task<IQueryable<Card>> SelectAllIQueryable()
+    public async Task<IQueryable<Card>> SelectAllIQueryableAsync()
     {
         var query = "SELECT * FROM Cards WHERE IsDeleted = false";
 
