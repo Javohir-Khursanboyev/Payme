@@ -64,7 +64,7 @@ public class PaymentCategoryRepository : IPaymentCategoryRepository
         }
     }
 
-    public async Task<IEnumerable<PaymentCategory>> SelectAllAsEnumerable()
+    public async Task<IEnumerable<PaymentCategory>> SelectAllAsEnumerableAsync()
     {
         var query = "SELECT * FROM PaymentCategories WHERE Id = @id AND IsDeleted = false";
 
@@ -74,7 +74,7 @@ public class PaymentCategoryRepository : IPaymentCategoryRepository
         }
     }
 
-    public async Task<IQueryable<PaymentCategory>> SelectAllAsQueryable()
+    public async Task<IQueryable<PaymentCategory>> SelectAllAsQueryableAsync()
     {
         var query = "SELECT * FROM PaymentCategories WHERE Id = @id AND IsDeleted = false";
 
