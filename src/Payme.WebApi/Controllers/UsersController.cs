@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Payme.Service.DTOs.Users;
-using Payme.Service.Interface;
+using Payme.Service.Services.UserServices;
 using Payme.WebApi.Models;
 
 namespace Payme.WebApi.Controllers;

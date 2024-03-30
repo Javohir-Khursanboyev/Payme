@@ -4,7 +4,7 @@ using Payme.Domain.Entities.Users;
 using Payme.Service.DTOs.Users;
 using Payme.Service.Exceptions;
 using Payme.Service.Helpers;
-using Payme.Service.Interface;
+using Payme.Service.Services.UserServices;
 
 namespace Payme.Service.Services;
 
