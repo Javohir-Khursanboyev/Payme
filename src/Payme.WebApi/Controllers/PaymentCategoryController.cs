@@ -8,14 +8,13 @@ namespace Payme.WebApi.Controllers;
   
 [Route("api/[controller]")]
 [ApiController]
-
 public class PaymentCategoryController : ControllerBase
 {
-    private readonly PaymentCategoryService service;
+    private readonly IPaymentCategoryService paymentCategoryService;
 
-    public PaymentCategoryController(PaymentCategoryService service)
+    public PaymentCategoryController(IPaymentCategoryService service)
     {
-        this.service = service;
+        this.paymentCategoryService = service;
     }
 
     // GET: api/<PaymentCategoryController>
@@ -26,7 +25,7 @@ public class PaymentCategoryController : ControllerBase
         {
             StatusCode = 200,
             Message = "OK",
-            Data = await service.CreateAsync(model)
+            Data = await paymentCategoryService.CreateAsync(model)
         });
     }
 
@@ -38,7 +37,7 @@ public class PaymentCategoryController : ControllerBase
         {
             StatusCode = 200,
             Message ="OK",
-            Data = await service.DeleteAsync(id)
+            Data = await paymentCategoryService.DeleteAsync(id)
         });
     }
 
@@ -50,7 +49,7 @@ public class PaymentCategoryController : ControllerBase
         {
             StatusCode = 200,
             Message = "OK",
-            Data = await service.UpdateAsync(id, model)
+            Data = await paymentCategoryService.UpdateAsync(id, model)
         });
     }
 
@@ -62,7 +61,7 @@ public class PaymentCategoryController : ControllerBase
         {
             StatusCode = 200,
             Message ="OK",
-            Data = await service.GetByIdAsync(id)
+            Data = await paymentCategoryService.GetByIdAsync(id)
         });
     }
 
@@ -74,7 +73,7 @@ public class PaymentCategoryController : ControllerBase
         {
             StatusCode =200,
             Message="OK",
-            Data = await service.GetAllAsync()
+            Data = await paymentCategoryService.GetAllAsync()
         });
     }
 
