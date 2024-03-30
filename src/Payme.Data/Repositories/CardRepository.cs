@@ -1,42 +1,89 @@
-﻿using Payme.Data.IRepositories;
+﻿using Dapper;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+using Payme.Data.IRepositories;
 using Payme.Domain.Entities.Cards;
+using Payme.Domain.Entities.Users;
 
 namespace Payme.Data.Repositories;
 
 public class CardRepository : ICardRepository
 {
-    public Task<bool> DeleteAsync(Card card)
+    private readonly string? connectionString;
+    public CardRepository(IConfiguration configuration)
     {
-        throw new NotImplementedException();
+        connectionString = configuration.GetConnectionString("DefaultConnection");
+    }
+    public async Task<Card> InsertAsync(Card card)
+    {
+        var cardQuery = @"INSERT INTO Cards (CustomerId, Type, Number, ExpiryData, Password, Balance, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
+                             VALUES (@CustomerId, @Type, @Number, @ExpiryData, @Password, @Balance, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
+                             RETURNING Id";
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            var id = await connection.ExecuteScalarAsync<long>(cardQuery, card);
+            card.Id = id;
+        }
+        return card;
     }
 
-    public Task<Card> InsertAsync(Card card)
+    public async Task<Card> UpdateAsync(Card card)
     {
-        throw new NotImplementedException();
+        var cardQuery = @"UPDATE Cards SET CustomerId = @CustomerId, Type = @Type, 
+                                           Number = @Number, ExpiryData = @ExpiryData, Password = @Password,
+                                           Balance = @Balance,UpdatedAt = @UpdatedAt, IsDeleted = false
+                                       WHERE Id = @Id";
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            await connection.ExecuteAsync(cardQuery, card);
+        }
+        return card;
     }
 
-    public Task SaveAsync()
+    public async Task<bool> DeleteAsync(Card card)
     {
-        throw new NotImplementedException();
+        var cardQuery = @"UPDATE Cards SET IsDeleted = false, 
+                                           DeletedAt = @DeletedAt 
+                                       WHERE Id = @Id";
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            await connection.ExecuteAsync(cardQuery, card);
+        }
+        return true;
     }
 
-    public Task<IEnumerable<Card>> SelectAllAsIEnumerable()
+    public async Task<Card> SelectAsync(long id)
     {
-        throw new NotImplementedException();
+        var query = "SELECT * FROM Cards WHERE IsDeleted = false";
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+#pragma warning disable CS8603 // Possible null reference return.
+            return await connection.QueryFirstOrDefaultAsync<Card>(query, new { id = id });
+#pragma warning restore CS8603 // Possible null reference return.
+        }
     }
 
-    public Task<IQueryable<Card>> SelectAllIQueryable()
+    public async Task<IEnumerable<Card>> SelectAllAsIEnumerable()
     {
-        throw new NotImplementedException();
+        var cardQuery = "SELECT * FROM Cards WHERE Id = @id AND IsDeleted = false";
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            return await connection.QueryAsync<Card>(cardQuery);
+        }
     }
 
-    public Task<Card> SelectAsync(long id)
+    public async Task<IQueryable<Card>> SelectAllIQueryable()
     {
-        throw new NotImplementedException();
-    }
+        var query = "SELECT * FROM Cards WHERE IsDeleted = false";
 
-    public Task<Card> UpdateAsync(Card card)
-    {
-        throw new NotImplementedException();
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            return (await connection.QueryAsync<Card>(query)).AsQueryable();
+        }
     }
 }
