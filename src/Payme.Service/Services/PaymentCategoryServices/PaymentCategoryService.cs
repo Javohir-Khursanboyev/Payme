@@ -41,7 +41,7 @@ public class PaymentCategoryService : IPaymentCategoryService
         var existPaymentCategory = await repository.SelectAsync(id)
             ?? throw new CustomException(404, "This paymentCategory is not found");
 
-        existPaymentCategory.IsDeleted = true;
+        existPaymentCategory.DeletedAt = DateTime.UtcNow;
         await repository.DeleteAsync(existPaymentCategory);
         return true;
     }
@@ -64,13 +64,11 @@ public class PaymentCategoryService : IPaymentCategoryService
     {
         var existModel = new PaymentCategory();
              
-
         if(isDelete)
         {
             existModel = mapper.Map<PaymentCategory>(model);
             existModel.Id = id;
         }
-
         else
         {
              existModel = await repository.SelectAsync(id)
@@ -79,6 +77,7 @@ public class PaymentCategoryService : IPaymentCategoryService
 
         existModel.UpdatedAt = DateTime.UtcNow;
         var updateModel = await repository.UpdateAsync(existModel);
+
         return mapper.Map<PaymentCategoryViewModel>(updateModel);
     }
 }
