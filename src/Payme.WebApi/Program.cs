@@ -18,6 +18,7 @@ builder.Services.AddSingleton(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<ICardRepository, CardRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();

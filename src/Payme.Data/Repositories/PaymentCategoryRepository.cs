@@ -24,7 +24,7 @@ public class PaymentCategoryRepository : IPaymentCategoryRepository
         return paymentCategory;
     }
 
-    public async Task<PaymentCategory> UpdateAsync(long id, PaymentCategory paymentCategory)
+    public async Task<PaymentCategory> UpdateAsync(PaymentCategory paymentCategory)
     {
         var query = @"UPDATE PaymentCategories SET Name = @Name
                              UpdatedAt = @UpdatedAt, IsDeleted = false

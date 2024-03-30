@@ -10,6 +10,7 @@ namespace Payme.Data.Repositories;
 public class CardRepository : ICardRepository
 {
     private readonly string? connectionString;
+
     public CardRepository(IConfiguration configuration)
     {
         connectionString = configuration.GetConnectionString("DefaultConnection");

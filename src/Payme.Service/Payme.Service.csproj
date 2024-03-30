@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Interface\**" />
-    <EmbeddedResource Remove="Interface\**" />
-    <None Remove="Interface\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 
