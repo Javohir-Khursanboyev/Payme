@@ -4,17 +4,16 @@ using Payme.Domain.Entities.Users;
 using Payme.Service.DTOs.Users;
 using Payme.Service.Exceptions;
 using Payme.Service.Helpers;
-using Payme.Service.Services.UserServices;
 
-namespace Payme.Service.Services;
+namespace Payme.Service.Services.UserServices;
 
 public class UserService : IUserService
 {
     private readonly IUserRepository userRepository;
-    private readonly IMapper mapper;    
+    private readonly IMapper mapper;
     public UserService(IUserRepository userRepository, IMapper mapper)
     {
-        this.userRepository = userRepository;  
+        this.userRepository = userRepository;
         this.mapper = mapper;
     }
 
@@ -65,7 +64,7 @@ public class UserService : IUserService
         var existUser = new User();
         user.Password = PasswordActions.Hashing(user.Password);
 
-        if(IsUsesDeleted)
+        if (IsUsesDeleted)
         {
             existUser = mapper.Map<User>(user);
             existUser.Id = id;
@@ -74,7 +73,7 @@ public class UserService : IUserService
         {
             existUser = await userRepository.SelectAsync(id) ??
                 throw new CustomException(404, "User is not found");
-        }   
+        }
 
         existUser.UpdatedAt = DateTime.UtcNow;
         var updatedUser = await userRepository.UpdateAsync(existUser);

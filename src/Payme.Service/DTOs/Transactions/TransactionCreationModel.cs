@@ -1,6 +1,4 @@
-﻿using Payme.Domain.Entities.Cards;
-
-namespace Payme.Service.DTOs.Transactions;
+﻿namespace Payme.Service.DTOs.Transactions;
 
 public class TransactionCreationModel
 {

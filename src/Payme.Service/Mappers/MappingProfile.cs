@@ -4,7 +4,7 @@ using Payme.Service.DTOs.Users;
 
 namespace Payme.Service.Mappers;
 
-public class MappingProfile:Profile
+public class MappingProfile : Profile
 {
     public MappingProfile()
     {
