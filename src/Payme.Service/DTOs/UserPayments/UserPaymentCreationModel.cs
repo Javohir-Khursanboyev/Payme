@@ -1,8 +1,4 @@
-﻿using Payme.Domain.Entities.Cards;
-using Payme.Domain.Entities.Payments;
-using Payme.Domain.Entities.Users;
-
-namespace Payme.Service.DTOs.UserPayments;
+﻿namespace Payme.Service.DTOs.UserPayments;
 
 public class UserPaymentCreationModel
 {

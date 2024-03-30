@@ -2,7 +2,7 @@
 
 public class PaymentViewModel
 {
-    public long Id { get; set; }    
+    public long Id { get; set; }
     public string Name { get; set; }
     public long PaymentCategoryId { get; set; }
 }

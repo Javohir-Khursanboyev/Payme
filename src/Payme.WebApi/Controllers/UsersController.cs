@@ -8,7 +8,7 @@ namespace Payme.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UsersController:ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly IUserService userService;
 

@@ -1,7 +1,6 @@
 using Payme.Data.IRepositories;
 using Payme.Data.Repositories;
 using Payme.Service.Mappers;
-using Payme.Service.Services;
 using Payme.Service.Services.UserServices;
 
 

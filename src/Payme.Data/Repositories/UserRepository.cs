@@ -50,7 +50,7 @@ public class UserRepository : IUserRepository
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
-             await connection.ExecuteAsync(query, user);
+            await connection.ExecuteAsync(query, user);
         }
         return true;
     }
@@ -81,7 +81,7 @@ public class UserRepository : IUserRepository
         using (var connection = new NpgsqlConnection(connectionString))
         {
 #pragma warning disable CS8603 // Possible null reference return.
-            return await connection.QueryFirstOrDefaultAsync<User>(query,new { id = id });
+            return await connection.QueryFirstOrDefaultAsync<User>(query, new { id = id });
 #pragma warning restore CS8603 // Possible null reference return.
         }
     }

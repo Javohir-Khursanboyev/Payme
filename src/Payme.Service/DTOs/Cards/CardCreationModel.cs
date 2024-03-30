@@ -1,5 +1,4 @@
-﻿using Payme.Domain.Entities.Users;
-using Payme.Domain.Enums;
+﻿using Payme.Domain.Enums;
 
 namespace Payme.Service.DTOs.Cards;
 
