@@ -17,11 +17,13 @@ public class UserRepository : IUserRepository
     public async Task<User> InsertAsync(User user)
     {
         var query = @"INSERT INTO Users (FirstName, LastName, Phone, Password, Role, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
-                             VALUES (@FirstName, @LastName, @Phone, @Password, @Role, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted);";
+                             VALUES (@FirstName, @LastName, @Phone, @Password, @Role, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted);
+                             SELECT CAST(SCOPE_IDENTITY() as bigint)";
 
         using (var connection = new SqlConnection(connectionString))
         {
-            await connection.ExecuteAsync(query, user);
+            var id = await connection.ExecuteScalarAsync<long>(query, user);
+            user.Id = id;
         }
         return user;
     }
@@ -52,19 +54,19 @@ public class UserRepository : IUserRepository
         }
         return true;
     }
-    public async Task<IEnumerable<User>> SelectAllAsIEnumerable()
+    public async Task<IEnumerable<User>> SelectAllAsIEnumerableAsync()
     {
-        var query = "SELECT * FROM Users";
-        
+        var query = "SELECT * FROM Users WHERE Id = @id AND IsDeleted = 0";
+
         using (var connection = new SqlConnection(connectionString))
         {
-            return (await connection.QueryAsync<User>(query)).ToList();
+            return await connection.QueryAsync<User>(query);
         }
     }
 
-    public async Task<IQueryable<User>> SelectAllIQueryable()
+    public async Task<IQueryable<User>> SelectAllIQueryableAsync()
     {
-        var query = "SELECT * FROM Users";
+        var query = "SELECT * FROM Users WHERE IsDeleted = 0";
 
         using (var connection = new SqlConnection(connectionString))
         {
@@ -74,7 +76,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User> SelectAsync(long id)
     {
-        var query = "SELECT * FROM Users WHERE Id = @id";
+        var query = "SELECT * FROM Users WHERE IsDeleted = 0";
 
         using (var connection = new SqlConnection(connectionString))
         {
