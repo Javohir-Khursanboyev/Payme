@@ -8,6 +8,6 @@ public interface IPaymentCategoryRepository
     Task<PaymentCategory> UpdateAsync(long id, PaymentCategory paymentCategory);
     Task<bool> DeleteAsync (PaymentCategory paymentCategory);
     Task<PaymentCategory> SelectAsync (long id);
-    Task<IEnumerable<PaymentCategory>> SelectAllAsEnumerable ();
-    Task<IQueryable<PaymentCategory>> SelectAllAsQueryable ();
+    Task<IEnumerable<PaymentCategory>> SelectAllAsEnumerableAsync ();
+    Task<IQueryable<PaymentCategory>> SelectAllAsQueryableAsync ();
 }
