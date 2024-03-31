@@ -1,3 +1,4 @@
+using Payme.Data.DbContexts;
 using Payme.Data.IRepositories;
 using Payme.Data.Repositories;
 using Payme.Service.Mappers;
@@ -6,6 +7,8 @@ using Payme.Service.Services.PaymentCategoryServices;
 using Payme.Service.Services.PaymentServices;
 using Payme.Service.Services.TransactionServices;
 using Payme.Service.Services.UserServices;
+using Payme.WebApi.MiddleWares;
+using System;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(builder.Configuration);
+builder.Services.AddSingleton<DataSession>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -33,6 +37,11 @@ builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 var app = builder.Build();
+{
+    using var scope = app.Services.CreateScope();
+    var dataSession = scope.ServiceProvider.GetRequiredService<DataSession>();
+    await dataSession.Init();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,6 +49,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleWare>();
 
 app.UseHttpsRedirection();
 
