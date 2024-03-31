@@ -5,6 +5,9 @@ using Payme.WebApi.Models;
 
 namespace Payme.WebApi.Controllers;
 
+
+[Route("api/[controller]")]
+[ApiController]
 public class TransactionController : ControllerBase
 {
     private ITransactionService transactionService;
