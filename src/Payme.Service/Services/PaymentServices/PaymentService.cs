@@ -26,9 +26,6 @@ public class PaymentService : IPaymentService
 
         var newPayment = mapper.Map<Payment>(model);
 
-        newPayment.CreatedAt = DateTime.UtcNow;
-        newPayment.UpdatedAt = DateTime.UtcNow;
-
         var createdPayment = await paymentRepository.InsertAsync(newPayment);
 
         return mapper.Map<PaymentViewModel>(createdPayment);
