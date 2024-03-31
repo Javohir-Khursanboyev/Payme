@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Payme.Data.IRepositories;
 using Payme.Domain.Entities.UserPayments;
+using Payme.Service.DTOs.Cards;
 using Payme.Service.DTOs.UserPayments;
 using Payme.Service.DTOs.Users;
 using Payme.Service.Exceptions;
@@ -42,7 +43,7 @@ public class UserPaymentService : IUserPaymentService
             throw new CustomException(400, "Balance is not enough");
 
         existCard.Balance -= model.Amount;
-        await userService.UpdateAsync(existUser.Id, mapper.Map<UserUpdateModel>(existUser), false);
+        await cardService.UpdateAsync(existCard.Id, mapper.Map<CardUpdateModel>(existCard), false);
         var createUserPayment = await repository.InsertAsync(mapper.Map<UserPayment>(model));
         return mapper.Map<UserPaymentViewModel>(createUserPayment);
     }

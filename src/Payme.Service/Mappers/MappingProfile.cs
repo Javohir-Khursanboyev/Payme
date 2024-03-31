@@ -20,7 +20,6 @@ public class MappingProfile : Profile
         CreateMap<User, UserViewModel>().ReverseMap();
         CreateMap<User, UserCreationModel>().ReverseMap();
         CreateMap<User, UserUpdateModel>().ReverseMap();
-        CreateMap<UserViewModel, UserUpdateModel>().ReverseMap();
 
         CreateMap<Card, CardViewModel>().ReverseMap();
         CreateMap<Card, CardCreationModel>().ReverseMap();
