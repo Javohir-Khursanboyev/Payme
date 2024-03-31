@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Payme.Domain.Entities.PaymentCategories;
 using Payme.Service.DTOs.PaymentCategories;
 using Payme.Service.Services.PaymentCategoryServices;
 using Payme.WebApi.Models;
 
 namespace Payme.WebApi.Controllers;
-  
+
 [Route("api/[controller]")]
 [ApiController]
-public class PaymentCategoryController : ControllerBase
+public class PaymentCategoriesController : ControllerBase
 {
     private readonly IPaymentCategoryService paymentCategoryService;
 
-    public PaymentCategoryController(IPaymentCategoryService service)
+    public PaymentCategoriesController(IPaymentCategoryService service)
     {
         this.paymentCategoryService = service;
     }
@@ -36,7 +35,7 @@ public class PaymentCategoryController : ControllerBase
         return Ok(new Response()
         {
             StatusCode = 200,
-            Message ="OK",
+            Message = "OK",
             Data = await paymentCategoryService.DeleteAsync(id)
         });
     }
@@ -60,7 +59,7 @@ public class PaymentCategoryController : ControllerBase
         return Ok(new Response()
         {
             StatusCode = 200,
-            Message ="OK",
+            Message = "OK",
             Data = await paymentCategoryService.GetByIdAsync(id)
         });
     }
@@ -71,10 +70,9 @@ public class PaymentCategoryController : ControllerBase
     {
         return Ok(new Response()
         {
-            StatusCode =200,
-            Message="OK",
+            StatusCode = 200,
+            Message = "OK",
             Data = await paymentCategoryService.GetAllAsync()
         });
     }
-
 }

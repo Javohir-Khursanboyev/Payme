@@ -8,11 +8,11 @@ namespace Payme.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class TransactionController : ControllerBase
+public class TransactionsController : ControllerBase
 {
-    private ITransactionService transactionService;
+    private readonly ITransactionService transactionService;
 
-    public TransactionController(ITransactionService transactionService)
+    public TransactionsController(ITransactionService transactionService)
     {
         this.transactionService = transactionService;
     }
