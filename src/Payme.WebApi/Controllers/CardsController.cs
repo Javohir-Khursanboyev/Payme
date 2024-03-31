@@ -6,7 +6,7 @@ using Payme.WebApi.Models;
 namespace Payme.WebApi.Controllers;
 
 [Route("api/[controller]")]
-    [ApiController]
+[ApiController]
 public class CardsController : ControllerBase
 {
     private ICardService cardService;
