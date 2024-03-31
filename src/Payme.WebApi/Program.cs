@@ -3,6 +3,7 @@ using Payme.Data.Repositories;
 using Payme.Service.Mappers;
 using Payme.Service.Services.CardServices;
 using Payme.Service.Services.PaymentCategoryServices;
+using Payme.Service.Services.PaymentServices;
 using Payme.Service.Services.TransactionServices;
 using Payme.Service.Services.UserServices;
 
@@ -23,11 +24,13 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
 builder.Services.AddScoped<IPaymentCategoryRepository, PaymentCategoryRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<IPaymentCategoryService, PaymentCategoryService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 var app = builder.Build();
 
