@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using Payme.Data.IRepositories;
+using Payme.Domain.Entities.UserPayments;
 using Payme.Service.DTOs.UserPayments;
+using Payme.Service.DTOs.Users;
+using Payme.Service.Exceptions;
 using Payme.Service.Services.CardServices;
+using Payme.Service.Services.PaymentServices;
 using Payme.Service.Services.UserServices;
 
 namespace Payme.Service.Services.UserPaymentServices;
@@ -11,29 +15,50 @@ public class UserPaymentService : IUserPaymentService
     private readonly IUserPaymentRepository repository;
     private readonly IUserService userService;
     private readonly ICardService cardService;
-    private readonly 
-    private readonly 
+    private readonly IPaymentService paymentService;
     private readonly IMapper mapper;
 
-    public UserPaymentService(IUserPaymentRepository repository, IMapper mapper)
+    public UserPaymentService(IUserPaymentRepository repository,
+        IUserService userService, ICardService cardService,
+        IPaymentService paymentService, IMapper mapper)
     {
         this.repository = repository;
+        this.userService = userService;
+        this.cardService = cardService;
+        this.paymentService = paymentService;
         this.mapper = mapper;
     }
 
     public async Task<UserPaymentViewModel> CreateAsync(UserPaymentCreationModel model)
     {
-        var userPayments = await repository.SelectAsIQueryableAsync();
+        var existUser = await userService.GetByIdAsync(model.UserId);
+        var existCard = await cardService.GetByIdAsync(model.CardId); 
+        await paymentService.GetByIdAsync(model.PaymentId);
 
+        if (existUser.Id != existCard.CustomerId)
+            throw new CustomException(400, "This card does not belong to you");
+
+        if (existCard.Balance < model.Amount)
+            throw new CustomException(400, "Balance is not enough");
+
+        existCard.Balance -= model.Amount;
+        await userService.UpdateAsync(existUser.Id, mapper.Map<UserUpdateModel>(existUser), false);
+        var createUserPayment = await repository.InsertAsync(mapper.Map<UserPayment>(model));
+        return mapper.Map<UserPaymentViewModel>(createUserPayment);
     }
 
-    public Task<IEnumerable<UserPaymentViewModel>> GetAllAsync()
+    public async Task<IEnumerable<UserPaymentViewModel>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var userPayments = await repository.SelectAsIEnumerableAsync();
+
+        return mapper.Map<IEnumerable<UserPaymentViewModel>>(userPayments);
     }
 
-    public Task<UserPaymentViewModel> GetByIdAsync(long id)
+    public async Task<UserPaymentViewModel> GetByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var userPayment =await repository.SelectAsync(id)
+            ?? throw new CustomException(404, "This UserPayment is not found");
+
+        return mapper.Map<UserPaymentViewModel>(userPayment);
     }
 }
