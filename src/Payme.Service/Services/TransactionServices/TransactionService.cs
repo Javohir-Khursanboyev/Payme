@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Payme.Data.IRepositories;
 using Payme.Domain.Entities.Transactions;
+using Payme.Service.DTOs.Cards;
 using Payme.Service.DTOs.Transactions;
 using Payme.Service.Exceptions;
 using Payme.Service.Services.CardServices;
@@ -33,6 +34,8 @@ public class TransactionService : ITransactionService
 
         senderCard.Balance -= transaction.Amount;
         receiverCard.Balance += transaction.Amount;
+        await cardService.UpdateAsync(senderCard.Id, mapper.Map<CardUpdateModel>(senderCard), false);
+        await cardService.UpdateAsync(receiverCard.Id, mapper.Map<CardUpdateModel>(receiverCard), false);
         
         var createdTransaction = await transactionRepository.InsertAsync(mapper.Map<Transaction>(transaction));
 

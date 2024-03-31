@@ -8,5 +8,4 @@ public class UserUpdateModel
     public string LastName { get; set; }
     public string Phone { get; set; }
     public string Password { get; set; }
-    public Role Role { get; set; }
 }
