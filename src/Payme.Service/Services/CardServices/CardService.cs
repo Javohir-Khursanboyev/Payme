@@ -88,13 +88,12 @@ public class CardService : ICardService
         return mapper.Map<CardViewModel>(existCard);
     }
 
-    public async Task<CardViewModel> DepositAsync(long id, decimal amount)
+    public async Task<CardViewModel> DepositAsync(CardDeposit cardDeposit)
     {
-        var cards = await cardRepository.SelectAllIQueryableAsync();
-        var existCard = cards.FirstOrDefault(u => u.Id == id && !u.IsDeleted)
-            ?? throw new Exception($"This card is not found With this id {id}");
+        var existCard = await cardRepository.SelectAsync(cardDeposit.Id) ??
+             throw new CustomException(404, "Card is not found");
 
-        existCard.Balance += amount;
+        existCard.Balance += cardDeposit.Amount;
         var depositCard = await cardRepository.UpdateAsync(existCard);
         return mapper.Map<CardViewModel>(existCard);
     }

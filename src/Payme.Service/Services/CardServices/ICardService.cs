@@ -51,5 +51,5 @@ public interface ICardService
     /// <param name="id">The ID of the card to deposit to.</param>
     /// <param name="amount">The amount to deposit.</param>
     /// <returns>The updated card view model after the deposit.</returns>
-    Task<CardViewModel> DepositAsync(long id, decimal amount);
+    Task<CardViewModel> DepositAsync(CardDeposit cardDeposit);
 }
