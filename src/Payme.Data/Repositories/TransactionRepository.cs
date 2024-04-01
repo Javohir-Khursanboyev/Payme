@@ -17,8 +17,8 @@ public class TransactionRepository : ITransactionRepository
 
     public async Task<Transaction> InsertAsync(Transaction transaction)
     {
-        var query = @"INSERT INTO Transactions (SenderId, ReceiverId, Amount, Password, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
-                                  VALUES (@SenderId, @ReceiverId, @Amount, @Password, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
+        var query = @"INSERT INTO Transactions (SenderCardId, ReceiverCardId, Amount, Password, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) 
+                                  VALUES (@SenderCardId, @ReceiverCardId, @Amount, @Password, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
                                   RETURNING Id";
 
         using (var connection = new NpgsqlConnection(connectionString))
@@ -31,7 +31,7 @@ public class TransactionRepository : ITransactionRepository
 
     public async Task<Transaction> UpdateAsync(Transaction transaction)
     {
-        var query = @"UPDATE Transactions SET SenderId = @SenderId, ReceiverId = @ReceiverId, Password = @Password,
+        var query = @"UPDATE Transactions SET SenderCardId = @SenderCardId, ReceiverCardId = @ReceiverCardId, Password = @Password,
                                               Amount = @Amount, UpdatedAt = @UpdatedAt, IsDeleted = false
                                           WHERE Id = @Id";
 

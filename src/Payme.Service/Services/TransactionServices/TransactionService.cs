@@ -4,6 +4,7 @@ using Payme.Domain.Entities.Transactions;
 using Payme.Service.DTOs.Cards;
 using Payme.Service.DTOs.Transactions;
 using Payme.Service.Exceptions;
+using Payme.Service.Helpers;
 using Payme.Service.Services.CardServices;
 
 namespace Payme.Service.Services.TransactionServices;
@@ -26,6 +27,7 @@ public class TransactionService : ITransactionService
         var senderCard = await cardService.GetByIdAsync(transaction.SenderCardId);
         var receiverCard = await cardService.GetByIdAsync(transaction.ReceiverCardId);
 
+        transaction.Password = PasswordActions.Hashing(transaction.Password);
         if (senderCard.Password != transaction.Password)
             throw new CustomException(400, "Password error");
 

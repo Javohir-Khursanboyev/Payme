@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Payme.Data.DbContexts;
 using Payme.Data.IRepositories;
 using Payme.Data.Repositories;
@@ -9,6 +10,7 @@ using Payme.Service.Services.TransactionServices;
 using Payme.Service.Services.UserPaymentServices;
 using Payme.Service.Services.UserServices;
 using Payme.WebApi.MiddleWares;
+using Payme.WebApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +39,12 @@ builder.Services.AddScoped<IPaymentCategoryService, PaymentCategoryService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IUserPaymentService, UserPaymentService>();
+
+builder.Services.AddControllers(options =>
+{
+    options.Conventions.Add(new RouteTokenTransformerConvention(
+                                      new ConfigurationApiUrlName()));
+});
 
 var app = builder.Build();
 {

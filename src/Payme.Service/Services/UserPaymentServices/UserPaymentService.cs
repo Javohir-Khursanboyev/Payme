@@ -42,7 +42,7 @@ public class UserPaymentService : IUserPaymentService
             throw new CustomException(400, "Balance is not enough");
 
         existCard.Balance -= model.Amount;
-        await cardService.UpdateAsync(existCard.Id, mapper.Map<CardUpdateModel>(existCard), false);
+        await cardService.UpdateAsync(existCard.Id, mapper.Map<CardUpdateModel>(existCard));
         var createUserPayment = await repository.InsertAsync(mapper.Map<UserPayment>(model));
         return mapper.Map<UserPaymentViewModel>(createUserPayment);
     }
