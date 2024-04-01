@@ -9,7 +9,6 @@ using Payme.Service.Services.TransactionServices;
 using Payme.Service.Services.UserPaymentServices;
 using Payme.Service.Services.UserServices;
 using Payme.WebApi.MiddleWares;
-using System;
 
 
 var builder = WebApplication.CreateBuilder(args);

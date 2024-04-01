@@ -36,7 +36,7 @@ public class TransactionService : ITransactionService
         receiverCard.Balance += transaction.Amount;
         await cardService.UpdateAsync(senderCard.Id, mapper.Map<CardUpdateModel>(senderCard), false);
         await cardService.UpdateAsync(receiverCard.Id, mapper.Map<CardUpdateModel>(receiverCard), false);
-        
+
         var createdTransaction = await transactionRepository.InsertAsync(mapper.Map<Transaction>(transaction));
 
         return mapper.Map<TransactionViewModel>(createdTransaction);

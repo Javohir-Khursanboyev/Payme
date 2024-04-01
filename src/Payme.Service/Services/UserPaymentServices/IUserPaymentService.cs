@@ -5,6 +5,6 @@ namespace Payme.Service.Services.UserPaymentServices;
 public interface IUserPaymentService
 {
     Task<UserPaymentViewModel> CreateAsync(UserPaymentCreationModel model);
-    Task<UserPaymentViewModel> GetByIdAsync (long id);
-    Task<IEnumerable<UserPaymentViewModel>> GetAllAsync ();
+    Task<UserPaymentViewModel> GetByIdAsync(long id);
+    Task<IEnumerable<UserPaymentViewModel>> GetAllAsync();
 }

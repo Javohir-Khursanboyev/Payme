@@ -3,7 +3,6 @@ using Payme.Data.IRepositories;
 using Payme.Domain.Entities.UserPayments;
 using Payme.Service.DTOs.Cards;
 using Payme.Service.DTOs.UserPayments;
-using Payme.Service.DTOs.Users;
 using Payme.Service.Exceptions;
 using Payme.Service.Services.CardServices;
 using Payme.Service.Services.PaymentServices;
@@ -33,7 +32,7 @@ public class UserPaymentService : IUserPaymentService
     public async Task<UserPaymentViewModel> CreateAsync(UserPaymentCreationModel model)
     {
         var existUser = await userService.GetByIdAsync(model.UserId);
-        var existCard = await cardService.GetByIdAsync(model.CardId); 
+        var existCard = await cardService.GetByIdAsync(model.CardId);
         await paymentService.GetByIdAsync(model.PaymentId);
 
         if (existUser.Id != existCard.CustomerId)
@@ -57,7 +56,7 @@ public class UserPaymentService : IUserPaymentService
 
     public async Task<UserPaymentViewModel> GetByIdAsync(long id)
     {
-        var userPayment =await repository.SelectAsync(id)
+        var userPayment = await repository.SelectAsync(id)
             ?? throw new CustomException(404, "This UserPayment is not found");
 
         return mapper.Map<UserPaymentViewModel>(userPayment);

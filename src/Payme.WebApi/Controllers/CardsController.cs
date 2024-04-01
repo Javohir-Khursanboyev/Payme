@@ -54,13 +54,13 @@ public class CardsController : ControllerBase
 
     // POST api/<CardsController>/5
     [HttpPost("{id}, {amount}")]
-    public async Task<IActionResult> PostAsync([FromBody] long id, decimal amount)
+    public async Task<IActionResult> PostAsync([FromBody] CardDeposit cardDeposit)
     {
         return Ok(new Response()
         {
             StatusCode = 200,
             Message = "OK",
-            Data = await cardService.DepositAsync(id, amount)
+            Data = await cardService.DepositAsync(cardDeposit)
         });
     }
 
