@@ -52,6 +52,18 @@ public class CardsController : ControllerBase
         });
     }
 
+    // POST api/<CardsController>/5
+    [HttpPost("{id}, {amount}")]
+    public async Task<IActionResult> PostAsync([FromBody] long id, decimal amount)
+    {
+        return Ok(new Response()
+        {
+            StatusCode = 200,
+            Message = "OK",
+            Data = await cardService.DepositAsync(id, amount)
+        });
+    }
+
     // PUT api/<CardsController>/5
     [HttpPut("{id}")]
     public async Task<IActionResult> PutASync(long id, [FromBody] CardUpdateModel card)
