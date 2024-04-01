@@ -1,6 +1,4 @@
-﻿using Payme.Domain.Enums;
-
-namespace Payme.Service.DTOs.Users;
+﻿namespace Payme.Service.DTOs.Users;
 
 public class UserUpdateModel
 {

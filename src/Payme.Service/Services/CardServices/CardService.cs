@@ -30,7 +30,7 @@ public class CardService : ICardService
         {
             if (existCard.IsDeleted)
                 return await UpdateAsync(existCard.Id, mapper.Map<CardUpdateModel>(card), true);
-            
+
             throw new CustomException(409, "Card is already exist");
         }
 

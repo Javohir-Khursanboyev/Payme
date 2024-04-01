@@ -4,10 +4,10 @@ namespace Payme.Data.IRepositories;
 
 public interface IPaymentCategoryRepository
 {
-    Task<PaymentCategory> InsertAsync(PaymentCategory paymentCategory); 
+    Task<PaymentCategory> InsertAsync(PaymentCategory paymentCategory);
     Task<PaymentCategory> UpdateAsync(PaymentCategory paymentCategory);
-    Task<bool> DeleteAsync (PaymentCategory paymentCategory);
-    Task<PaymentCategory> SelectAsync (long id);
-    Task<IEnumerable<PaymentCategory>> SelectAllAsEnumerableAsync ();
-    Task<IQueryable<PaymentCategory>> SelectAllAsQueryableAsync ();
+    Task<bool> DeleteAsync(PaymentCategory paymentCategory);
+    Task<PaymentCategory> SelectAsync(long id);
+    Task<IEnumerable<PaymentCategory>> SelectAllAsEnumerableAsync();
+    Task<IQueryable<PaymentCategory>> SelectAllAsQueryableAsync();
 }

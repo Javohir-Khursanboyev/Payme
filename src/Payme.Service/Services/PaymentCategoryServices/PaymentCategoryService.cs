@@ -8,7 +8,7 @@ namespace Payme.Service.Services.PaymentCategoryServices;
 
 public class PaymentCategoryService : IPaymentCategoryService
 {
-    private readonly IPaymentCategoryRepository repository; 
+    private readonly IPaymentCategoryRepository repository;
     private readonly IMapper mapper;
 
     public PaymentCategoryService(IPaymentCategoryRepository repository, IMapper mapper)
@@ -24,9 +24,9 @@ public class PaymentCategoryService : IPaymentCategoryService
         var existPaymentCategory = paymentCategories.FirstOrDefault(p => p.Name == model.Name);
         if (existPaymentCategory != null)
         {
-            if(existPaymentCategory.IsDeleted )
+            if (existPaymentCategory.IsDeleted)
             {
-                return  await UpdateAsync(existPaymentCategory.Id, mapper.Map<PaymentCategoryUpdateModel>(model), true);
+                return await UpdateAsync(existPaymentCategory.Id, mapper.Map<PaymentCategoryUpdateModel>(model), true);
             }
 
             throw new CustomException(409, "User is already exist");
@@ -48,7 +48,7 @@ public class PaymentCategoryService : IPaymentCategoryService
 
     public async Task<IEnumerable<PaymentCategoryViewModel>> GetAllAsync()
     {
-       var paymentCategories =  await repository.SelectAllAsEnumerableAsync();
+        var paymentCategories = await repository.SelectAllAsEnumerableAsync();
         return mapper.Map<IEnumerable<PaymentCategoryViewModel>>(paymentCategories);
     }
 
@@ -63,16 +63,16 @@ public class PaymentCategoryService : IPaymentCategoryService
     public async Task<PaymentCategoryViewModel> UpdateAsync(long id, PaymentCategoryUpdateModel model, bool isDelete = false)
     {
         var existModel = new PaymentCategory();
-             
-        if(isDelete)
+
+        if (isDelete)
         {
             existModel = mapper.Map<PaymentCategory>(model);
             existModel.Id = id;
         }
         else
         {
-             existModel = await repository.SelectAsync(id)
-                ?? throw new CustomException(404, "This paymentCategory is not found");
+            existModel = await repository.SelectAsync(id)
+               ?? throw new CustomException(404, "This paymentCategory is not found");
         }
 
         existModel.UpdatedAt = DateTime.UtcNow;
