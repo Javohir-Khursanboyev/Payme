@@ -88,12 +88,12 @@ public class CardService : ICardService
         return mapper.Map<CardViewModel>(existCard);
     }
 
-    public async Task<CardViewModel> DepositAsync(CardDeposit cardDeposit)
+    public async Task<CardViewModel> DepositAsync(long id, decimal amount)
     {
-        var existCard = await cardRepository.SelectAsync(cardDeposit.Id) ??
+        var existCard = await cardRepository.SelectAsync(id) ??
              throw new CustomException(404, "Card is not found");
 
-        existCard.Balance += cardDeposit.Amount;
+        existCard.Balance += amount;
         var depositCard = await cardRepository.UpdateAsync(existCard);
         return mapper.Map<CardViewModel>(existCard);
     }

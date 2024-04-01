@@ -9,6 +9,7 @@ using Payme.Service.DTOs.Cards;
 using Payme.Service.DTOs.PaymentCategories;
 using Payme.Service.DTOs.Payments;
 using Payme.Service.DTOs.Transactions;
+using Payme.Service.DTOs.UserPayments;
 using Payme.Service.DTOs.Users;
 
 namespace Payme.Service.Mappers;
@@ -24,6 +25,7 @@ public class MappingProfile : Profile
         CreateMap<Card, CardViewModel>().ReverseMap();
         CreateMap<Card, CardCreationModel>().ReverseMap();
         CreateMap<Card, CardUpdateModel>().ReverseMap();
+        CreateMap<CardViewModel, CardUpdateModel>().ReverseMap();
 
         CreateMap<Transaction, TransactionViewModel>().ReverseMap();
         CreateMap<Transaction, TransactionCreationModel>().ReverseMap();
@@ -33,9 +35,9 @@ public class MappingProfile : Profile
         CreateMap<Payment, PaymentCreationModel>().ReverseMap();
         CreateMap<Payment, PaymentUpdateModel>().ReverseMap();
 
-        CreateMap<UserPayment, UserViewModel>().ReverseMap();
-        CreateMap<UserPayment, UserCreationModel>().ReverseMap();
-        CreateMap<UserPayment, UserUpdateModel>().ReverseMap();
+        CreateMap<UserPayment, UserPaymentCreationModel>().ReverseMap();
+        CreateMap<UserPayment, UserPaymentViewModel>().ReverseMap();
+        CreateMap<UserPayment, UserPaymentUpdateModel>().ReverseMap();
 
         CreateMap<PaymentCategory, PaymentCategoryViewModel>().ReverseMap();
         CreateMap<PaymentCategory, PaymentCategoryCreationModel>().ReverseMap();
