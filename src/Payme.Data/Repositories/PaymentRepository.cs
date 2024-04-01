@@ -28,7 +28,7 @@ public class PaymentRepository : IPaymentRepository
 
     public async Task<Payment> InsertAsync(Payment payment)
     {
-        var query = @"INSERT INTO Payment(Name, PaymentCategoryId, CreatedAt, UpdatedAt, DeletedAt, IsDeleted)
+        var query = @"INSERT INTO Payments(Name, PaymentCategoryId, CreatedAt, UpdatedAt, DeletedAt, IsDeleted)
                         Values(@Name, @PaymentCategoryId, @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)
                         RETURNING Id";
         using (var connection = new NpgsqlConnection(connectionString))

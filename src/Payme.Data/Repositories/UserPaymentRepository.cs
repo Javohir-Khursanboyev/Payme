@@ -16,7 +16,7 @@ public class UserPaymentRepository : IUserPaymentRepository
 
     public async Task<UserPayment> InsertAsync(UserPayment userPayment)
     {
-        var query = "INSERT INTO UserPayment (UserId, CardId, PaymentId, AccountNumber," +
+        var query = "INSERT INTO UserPayments (UserId, CardId, PaymentId, AccountNumber," +
             " Amount, AdditionalInformation, CreatedAt, UpdatedAt, DeletedAt, IsDeleted) " +
             " VALUES (@UserId, @CardId, @PaymentId, @AccountNumber, @Amount, @AdditionalInformation," +
             " @CreatedAt, @UpdatedAt, @DeletedAt, @IsDeleted)";
@@ -36,7 +36,7 @@ public class UserPaymentRepository : IUserPaymentRepository
 
     public async Task<UserPayment> SelectAsync(long id)
     {
-        var query = "SELECT * FROM UserPayment WHERE IsDeleted = false";
+        var query = "SELECT * FROM UserPayments WHERE IsDeleted = false";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
@@ -48,7 +48,7 @@ public class UserPaymentRepository : IUserPaymentRepository
 
     public async Task<IEnumerable<UserPayment>> SelectAsIEnumerableAsync()
     {
-        var query = "SELECT * FROM UserPayment WHERE IsDeleted = false";
+        var query = "SELECT * FROM UserPayments WHERE IsDeleted = false";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {
@@ -58,7 +58,7 @@ public class UserPaymentRepository : IUserPaymentRepository
 
     public async Task<IEnumerable<UserPayment>> SelectAsIQueryableAsync()
     {
-        var query = "SELECT * FROM UserPayment WHERE IsDeleted = false";
+        var query = "SELECT * FROM UserPayments WHERE IsDeleted = false";
 
         using (var connection = new NpgsqlConnection(connectionString))
         {

@@ -32,9 +32,9 @@ public class Card : Auditable
     public long Number { get; set; }
 
     /// <summary>
-    /// The ExpiryData property represents the expiryData for the card.
+    /// The ExpiryData property represents the expiryDate for the card.
     /// </summary>
-    public string ExpiryData { get; set; }
+    public string ExpiryDate { get; set; }
 
     /// <summary>
     /// The Password property represents the password for the card.
